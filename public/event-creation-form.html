@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Event - UniEvent</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS for Modal Structure (Inlined for simplicity and centering fix) */
+        .app-modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .modal-content-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 350px;
+            width: 90%;
+            position: relative;
+            transform: scale(1.05); 
+            animation: fadeIn 0.3s ease-out;
+            margin-top: 0; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1.05); }
+        }
+        
+        .modal-content-box h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .modal-content-box p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .modal-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        
+        /* Theming for different types */
+        .success-modal .modal-icon { color: #4CAF50; }
+        .error-modal .modal-icon { color: #f44336; }
+        .info-modal .modal-icon { color: #2196F3; }
+
+        .success-modal .modal-button { background-color: #4CAF50; color: white; }
+        .error-modal .modal-button { background-color: #f44336; color: white; }
+        .info-modal .modal-button { background-color: #2196F3; color: white; }
+
+        .success-modal .modal-button:hover { background-color: #388E3C; }
+        .error-modal .modal-button:hover { background-color: #D32F2F; }
+        .info-modal .modal-button:hover { background-color: #1976D2; }
+
+        /* Back button styling (ensure .form-box has position: relative) */
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            width: auto;
+        }
+        .form-box {
+            position: relative; 
+            padding-top: 60px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box large-form">
+            <button onclick="window.location.href='organizer-dashboard.html';" class="btn primary-btn "><i class="fas fa-arrow-left"></i> Back</button>
+ 
+            <h1>Create New Event</h1>
+            <p>Define the main event details and the individual competitions within it.</p>
+            
+            <form id="event-creation-form">
+                
+                <!-- Section 1: Basic Details -->
+                <h3 class="form-section-title">1. Event Details & Constraints</h3>
+                <div class="form-grid">
+                    <div class="input-group full-width">
+                        <label for="title"><i class="fas fa-calendar-day"></i> Event Title (e.g., TechCse 2025)</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="department">Organizing Department</label>
+                        <select id="department" name="department" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Administration">Administration</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="type">Main Event Category</label>
+                        <select id="type" name="type" required>
+                            <option value="Technical">Technical</option>
+                            <option value="Non-Technical">Non-Technical</option>
+                            <option value="General">General / Mixed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="max_comps_per_student"><i class="fas fa-lock-open"></i> Max Competitions Per Student</label>
+                        <input type="number" id="max_comps_per_student" name="max_comps_per_student" value="2" min="1" required>
+                        <small class="help-text">Max number of comps a student can register for in this event.</small>
+                    </div>
+
+                    <!-- Image Upload Options -->
+                    <div class="input-group full-width image-upload-group">
+                        <label><i class="fas fa-image"></i> Event Poster/Banner</label>
+                        
+                        <div class="radio-options">
+                            <label>
+                                <input type="radio" name="upload_method" value="url" checked> URL (Paste Link)
+                            </label>
+                            <label>
+                                <input type="radio" name="upload_method" value="file"> File (Simulated System Upload)
+                            </label>
+                        </div>
+
+                        <div id="image-url-input">
+                            <input type="text" id="photo_url" name="photo_url" placeholder="Paste a direct link (URL) to your image">
+                        </div>
+                        
+                        <div id="image-file-input" class="hidden">
+                            <input type="file" id="photo_file" name="photo_file" accept="image/*">
+                            <small class="help-text">The filename will be stored as a placeholder due to environment limitations.</small>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label for="description">Event Description</label>
+                        <textarea id="description" name="description" rows="8" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Section 2: Scheduling & Venue -->
+                <h3 class="form-section-title">2. Date & Venue</h3>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="date"><i class="fas fa-calendar"></i> Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="venue"><i class="fas fa-map-marker-alt"></i> Venue</label>
+                        <select id="venue" name="venue" required>
+                            <option value="" disabled selected>Select Venue</option>
+                            <option value="Auditorium">Auditorium</option>
+                            <option value="Lab 101">Lab 101</option>
+                            <option value="Seminar Hall">Seminar Hall</option>
+                            <option value="Football Ground">Football Ground</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="start_time"><i class="fas fa-clock"></i> Start Time</label>
+                        <input type="time" id="start_time" name="start_time" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="end_time"><i class="fas fa-clock"></i> End Time</label>
+                        <input type="time" id="end_time" name="end_time" required>
+                    </div>
+                </div>
+
+                <div id="conflict-message" class="conflict-alert hidden">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    **VENUE CONFLICT DETECTED:** This venue is booked during the selected time slot.
+                </div>
+                
+                <!-- Section 3: Dynamic Competitions List -->
+                <h3 class="form-section-title">3. Define Competitions</h3>
+                <div id="competition-list">
+                    <!-- Dynamic Competition Cards Go Here -->
+                </div>
+
+                <button type="button" id="add-competition-btn" class="secondary-btn small-btn">
+                    <i class="fas fa-plus"></i> Add Competition
+                </button>
+                
+                <hr style="margin-top: 30px; margin-bottom: 20px;">
+
+                <button type="submit" class="register-btn">Submit Full Event</button>
+            </form>
+        </div>
+
+        <!-- UNIVERSAL CUSTOM MESSAGE MODAL STRUCTURE -->
+        <div id="app-modal" class="app-modal">
+            <div class="modal-content-box">
+                <i id="modal-icon" class="modal-icon"></i>
+                <h3 id="modal-title">Status</h3>
+                <p id="modal-message">Loading...</p>
+                <button class="modal-button" onclick="hideAlert()">OK</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/event-creation-script.js"></script>
+    <script>
+        // Ensure the initial card is added and attach radio button listener
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof addCompetitionCard === 'function') {
+                addCompetitionCard();
+            }
+            // Logic to switch between URL and File input views
+            document.querySelectorAll('input[name="upload_method"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    document.getElementById('image-url-input').classList.toggle('hidden', e.target.value !== 'url');
+                    document.getElementById('image-file-input').classList.toggle('hidden', e.target.value !== 'file');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

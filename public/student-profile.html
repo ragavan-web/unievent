@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - UniEvent</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <i class="fas fa-user-circle logo-icon"></i>
+                <span>Student Profile</span>
+            </div>
+            <div class="user-info">
+                <button onclick="window.location.href='student-dashboard.html';" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard-main-simple">
+            <section class="profile-card">
+                <h2>My Account Details</h2>
+                
+                <form id="profile-update-form">
+                    <div id="profile-content" class="profile-details-grid">
+                        <!-- Profile details and input fields will be rendered here by JS -->
+                        <p class="loading-message"><i class="fas fa-spinner fa-spin"></i> Loading profile...</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="save-profile-btn" class="register-btn" disabled>
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <p id="status-message" style="margin-top: 15px; font-weight: 500;"></p>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/student-profile-script.js"></script>
+    <style>
+        .profile-card {
+            max-width: 700px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .profile-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .profile-detail-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            /* Convert display format to input-group style */
+        }
+        .profile-detail-item label {
+            display: block;
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .profile-detail-item input,
+        .profile-detail-item select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        .form-actions {
+            margin-top: 30px;
+            text-align: right;
+        }
+        #save-profile-btn {
+            width: auto;
+            padding: 10px 20px;
+        }
+    </style>
+</body>
+</html>

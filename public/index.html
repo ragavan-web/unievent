@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniEvent – Your Campus, United</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Font Awesome is assumed to be linked in your custom setup or external file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER (NAVBAR) -->
+        <header class="navbar">
+            <div class="logo">
+                <!-- Assuming you have a logo image or text -->
+                <img src="/images/unievent-logo.png" alt="UniEvent Logo"> 
+                <span>UniEvent</span>
+            </div>
+            <nav class="nav-links">
+                <!-- 1. Features: Scrolls to the Features section -->
+                <a href="#features-section">Features</a>
+                
+                <!-- 2. ALTERNATIVE: Links to the new Contact section -->
+                <a href="#contact-us-section">Contact Us</a>
+                
+                <!-- 3. Search Icon: Displays a simulation or directs to a search page (simulated alert)
+                <i class="fas fa-search" id="search-icon"></i>  -->
+                
+                <!-- 4. Login / Sign Up: Directs to the main authentication gateway -->
+                <a href="login-register.html" class="btn btn-primary">Login / Sign Up</a>
+            </nav>
+        </header>
+
+        <!-- MAIN HERO SECTION -->
+        <main class="hero-section">
+            <div class="hero-content">
+                <div class="hero-image-placeholder">
+                    <!-- Placeholder for the main hero image -->
+                    <img src="/images/students-collaborating.jpg" alt="Students collaborating">
+                </div>
+                <div class="hero-text">
+                    <p class="tagline">Stay connected. Discover events.</p>
+                    <h1>UniEvent – Your Campus, United</h1>
+                    <p class="description">Centralized for seamless college event management.</p>
+                    <div class="hero-buttons">
+                        <!-- Explore Events: Directs to login/role selection first -->
+                        <a href="login-register.html" class="btn primary-btn">Explore Events</a>
+                        
+                        <!-- Learn More: Links to the detailed Guide section -->
+                        <a href="#guide-section" class="btn secondary-btn">How It Works</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURES SECTION (Scroll Target) -->
+            <section class="features-grid" id="features-section">
+                <div class="feature-item">
+                    <i class="fas fa-calendar-check icon"></i> 
+                    <span>Smart Scheduling</span>
+                    <p>Automated checks prevent venue and time conflicts instantly.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt icon"></i> 
+                    <span>Venue Booking</span>
+                    <p>Organizers can book campus resources without manual oversight.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell icon"></i> 
+                    <span>Instant Notifications</span>
+                    <p>Real-time updates for class reps and registered participants.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users-cog icon"></i> 
+                    <span>Role-Based Portals</span>
+                    <p>Separate dashboards for Students and Organizers for tailored tools.</p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- HOW IT WORKS / GUIDE SECTION (Retained) -->
+        <section id="guide-section" style="padding-top: 50px; padding-bottom: 50px;">
+            <hr style="margin-bottom: 30px;">
+            <h2 style="text-align: center; color: var(--primary-color);">UniEvent Guide: How It Works</h2>
+            
+            <div style="display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap;">
+                
+                <!-- Student Guide -->
+                <div style="flex: 1; min-width: 300px; padding: 20px; border-radius: 8px; background-color: #e3f2fd;">
+                    <h3 style="color: #1e88e5;"><i class="fas fa-user-graduate"></i> For Students</h3>
+                    <ol style="padding-left: 20px; line-height: 1.6;">
+                        <li><span>Sign Up / Login</span> using your official email or register number.</li>
+                        <li><span>Explore Events</span> on the dashboard, filtering by department or type.</li>
+                        <li><span>View Details</span> to see all nested competitions.</li>
+                        <li><span>Register</span> for competitions (our system automatically checks and enforces limits set by the organizer).</li>
+                        <li><span>Track</span> all your sign-ups on the "My Registrations" page.</li>
+                    </ol>
+                </div>
+                
+                <!-- Organizer Guide -->
+                <div style="flex: 1; min-width: 300px; padding: 20px; border-radius: 8px; background-color: #e8f5e9;">
+                    <h3 style="color: #43a047;"><i class="fas fa-briefcase"></i> For Organizers</h3>
+                    <ol style="padding-left: 20px; line-height: 1.6;">
+                        <li><span>Register</span> your departmental account using your official staff email.</li>
+                        <li><span>Post New Event</span> using the form, including event dates, venue, and a simulated photo URL.</li>
+                        <li><span>Define Competitions,</span> setting unique rules (team size, fee, coordinator contact) for each one.</li>
+                        <li>The system automatically runs a <span>**Venue Conflict Check**</span> before submission.</li>
+                        <li><span>Manage Registrations</span> by viewing the live report table for student lists and details.</li>
+                    </ol>
+                </div>
+                
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-weight: 500; color: #555;">Ready to organize or participate? Click "Login / Sign Up" to get started!</p>
+        </section>
+
+        <!-- NEW: CONTACT US SECTION (Scroll Target) -->
+        <section id="contact-us-section" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
+            <hr style="margin-bottom: 30px;">
+            <h2 style="color: var(--primary-color);">Contact UniEvent Support</h2>
+            <p style="font-size: 1.1em;">For technical assistance or partnership inquiries, please reach out to the College Administration:</p>
+            <div style="margin-top: 20px;">
+                <p><i class="fas fa-envelope"></i> Email: ragavendhra21@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +91 9500077989</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- CLIENT-SIDE SCRIPT FOR INTERACTIVITY -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to handle smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Handle Search Icon Click
+            const searchIcon = document.getElementById('search-icon');
+            searchIcon.addEventListener('click', () => {
+                alert("Search functionality will be available after logging in to the dashboard!");
+            });
+        });
+    </script>
+</body>
+</html>

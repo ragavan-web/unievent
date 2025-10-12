@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Registrations - UniEvent</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <i class="fas fa-ticket-alt logo-icon"></i>
+                <span>My Event Registrations</span>
+            </div>
+            <div class="user-info">
+                <button onclick="window.location.href='student-dashboard.html';" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard-main-simple">
+            <section class="registration-report-section">
+                <div class="report-header">
+                    <h2>Total Competitions Registered: <span id="registration-count">0</span></h2>
+                    <p id="user-welcome-info"></p>
+                </div>
+
+                <table class="data-table details-table">
+                    <thead>
+                        <tr>
+                            <th>Event Title</th>
+                            <th>Competition Name</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Coordinator Phone</th>
+                            <th>Fee Status</th>
+                            <th>Registered On</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registrations-table-body">
+                        <tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading registrations...</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/my-registrations-script.js"></script>
+</body>
+</html>

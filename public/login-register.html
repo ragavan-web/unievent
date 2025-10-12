@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - UniEvent</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Inline CSS for Modal (for clean packaging) -->
+    <style>
+        /* Ensures the login box is positioned correctly for the back button and general auth flow */
+        .login-box {
+            position: relative; 
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+        .modal-content h3 {
+            color: var(--primary-color, #3f51b5);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .modal-content input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .modal-buttons button {
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            flex-grow: 1;
+            transition: opacity 0.2s;
+        }
+        .modal-buttons .confirm-btn {
+            background-color: var(--primary-color, #3f51b5);
+            color: white;
+            border: none;
+        }
+        .modal-buttons .confirm-btn:hover {
+            opacity: 0.9;
+        }
+        .modal-buttons .cancel-btn {
+            background-color: #eee;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+        .modal-error {
+            color: #e53935;
+            font-weight: 500;
+            margin-bottom: 15px;
+            min-height: 20px; /* Reserves space so text doesn't cause layout shift */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <button onclick="window.location.href='index.html';" class="btn primary-btn left"><i class="fas fa-arrow-left"></i> Back</button>
+  
+            <h1>Join UniEvent</h1>
+            <p>I am a...</p>
+            <div class="role-selection">
+                <!-- STUDENT ROLE (Direct Access) -->
+                <a href="student.html" class="role-btn student-role">
+                    <i class="fas fa-user-graduate"></i>
+                    Student
+                </a>
+                <!-- ORGANIZER ROLE (Gated Access) -->
+                <a href="#" id="organizer-gate-btn" class="role-btn organizer-role">
+                    <i class="fas fa-briefcase"></i>
+                    Organizer
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CUSTOM PASSKEY MODAL -->
+    <div id="passkey-modal" class="modal">
+        <div class="modal-content">
+            <h3>Organizer Access Gate (ORGKEY2025)</h3>
+            <div class="modal-error" id="modal-error-message"></div>
+            <input type="password" id="passkey-input" placeholder="Enter Organizer Passkey" autofocus>
+            <div class="modal-buttons">
+                <button class="confirm-btn" id="passkey-submit">Submit</button>
+                <button class="cancel-btn" id="passkey-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ADMIN_PASSKEY = "ORGKEY2025";
+            const targetURL = "organizer-login-form.html";
+            
+            const organizerBtn = document.getElementById('organizer-gate-btn');
+            const modal = document.getElementById('passkey-modal');
+            const passkeyInput = document.getElementById('passkey-input');
+            const submitBtn = document.getElementById('passkey-submit');
+            const cancelBtn = document.getElementById('passkey-cancel');
+            const errorMessage = document.getElementById('modal-error-message');
+
+            const showModal = () => {
+                modal.style.display = 'flex';
+                passkeyInput.value = '';
+                errorMessage.textContent = '';
+                passkeyInput.focus();
+            };
+
+            const hideModal = () => {
+                modal.style.display = 'none';
+            };
+
+            const validatePasskey = () => {
+                const inputKey = passkeyInput.value;
+                if (inputKey === ADMIN_PASSKEY) {
+                    hideModal();
+                    window.location.href = targetURL;
+                } else {
+                    errorMessage.textContent = "Incorrect Passkey. Access denied.";
+                    passkeyInput.focus();
+                }
+            };
+            
+            // --- Event Listeners ---
+            
+            // 1. Show modal when organizer button is clicked
+            organizerBtn.addEventListener('click', showModal);
+
+            // 2. Hide modal when cancel button is clicked
+            cancelBtn.addEventListener('click', hideModal);
+
+            // 3. Submit passkey when Enter key is pressed in the input field
+            passkeyInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    validatePasskey();
+                }
+            });
+
+            // 4. Submit passkey when submit button is clicked
+            submitBtn.addEventListener('click', validatePasskey);
+        });
+    </script>
+</body>
+</html>

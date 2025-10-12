@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events - UniEvent Organizer</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* General modal styling */
+        .app-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 350px;
+            width: 90%;
+            position: relative;
+            transform: scale(1.05);
+            animation: fadeIn 0.3s ease-out;
+            margin-top: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Specific styles for the confirmation modal */
+        #confirm-modal .modal-content-box {
+            max-width: 450px;
+        }
+        
+        #confirm-modal .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #confirm-modal .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 50%; /* Adjusted width for two buttons */
+            transition: background-color 0.2s;
+            text-align: center;
+        }
+
+        .modal-button.confirm-btn {
+            background-color: #f44336; /* Red for delete/destructive action */
+            color: white;
+        }
+        .modal-button.confirm-btn:hover {
+            background-color: #D32F2F;
+        }
+        
+        .modal-button.cancel-btn {
+            background-color: #ccc; /* Grey for cancel */
+            color: #333;
+        }
+        .modal-button.cancel-btn:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <i class="fas fa-list-alt logo-icon"></i>
+                <span>My Events List</span>
+            </div>
+            <div class="user-info">
+                <button onclick="window.location.href='organizer-dashboard.html';" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+        </header>
+
+        <main class="organizer-main">
+            <section class="event-list-management">
+                <h2>Events Organized by <span id="organizer-dept-name">Your Department</span></h2>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date & Time</th>
+                            <th>Venue</th>
+                            <th>Total Comps</th>
+                            <th>Total Sign-ups</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="events-table-body">
+                        <tr>
+                            <td colspan="6" class="loading-row">
+                                <i class="fas fa-spinner fa-spin"></i> Loading department events...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+        
+        <div id="app-modal" class="app-modal">
+            <div class="modal-content-box">
+                <i id="modal-icon" class="modal-icon"></i>
+                <h3 id="modal-title">Status</h3>
+                <p id="modal-message">Loading...</p>
+                <button class="modal-button" onclick="hideAlert()">OK</button>
+            </div>
+        </div>
+
+        <div id="confirm-modal" class="app-modal">
+            <div class="modal-content-box">
+                <i id="confirm-icon" class="modal-icon fas fa-question-circle"></i>
+                <h3 id="confirm-title">Are you sure?</h3>
+                <p id="confirm-message">This action cannot be undone.</p>
+                <div class="modal-buttons">
+                    <button class="btn modal-button confirm-btn" id="confirm-ok-btn">Confirm</button>
+                    <button class="btn modal-button cancel-btn" id="confirm-cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/ui-utils.js"></script>
+    <script src="/js/organizer-events-list.js"></script>
+</body>
+</html>
