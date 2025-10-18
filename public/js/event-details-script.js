@@ -129,7 +129,7 @@ const handleRegistration = async (e) => {
     }
     
     button.disabled = true;
-    button.textContent = 'Processing...';
+    button.textContent = 'Registered...';
 
     try {
         const response = await fetch('/api/events/register', {
